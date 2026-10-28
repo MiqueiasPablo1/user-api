@@ -6,8 +6,8 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from database import Base, engine, get_db
-from models import Usuario
+from database import engine, get_db
+from models import Base, Usuario
 from schemas import UsuarioAtualizacao, UsuarioCriacao, UsuarioResposta
 
 
