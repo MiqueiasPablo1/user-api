@@ -17,14 +17,16 @@ url = URL.create(
 
 engine = create_engine(url)
 
-def testar_conexao():
-    with engine.connect() as conexao:
-        resultado = conexao.execute(text("SELECT current_database()"))
-        print(f"Conectado ao banco: {resultado.scalar()}")
+SessionLocal = sessionmaker(
+    bind=engine,
+    autoflush=False,
+    autocommit=False,
+)
 
-if __name__ == "__main__":
-    testar_conexao()
 
-from models import Base
-
-Base.metadata.create_all(bind=engine)
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
